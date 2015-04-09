@@ -1,0 +1,44 @@
+{
+  "name": "generator-emad",
+  "version": "0.1.0",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "ema-digital/generator-emad",
+  "author": {
+    "name": "Eric Mower and Associates",
+    "email": "pump_admin@mower.com",
+    "url": "https://github.com/ema-digital"
+  },
+  "contributors": [
+    {
+      "name": "Ethan Gardner"
+    }
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "bugs": {
+    "url": "https://github.com/ema-digital/generator-emad/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ema-digital/generator-emad.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "lodash": "^3.6.0",
+    "upath": "^0.1.5",
+    "yeoman-generator": "^0.19.0",
+    "yosay": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}

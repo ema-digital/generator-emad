@@ -1,0 +1,9 @@
+{
+  "dirs": [
+    {
+      "source": "<%= source %>/",
+      "target": "<%= target %>",
+      "env": "<%= env %>"
+    }
+  ]
+}
