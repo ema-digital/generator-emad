@@ -1,4 +1,4 @@
 {
-  "exclude": [],
-  "include": []
+  "exclude": [<%= exclude %>],
+  "include": [<%= include %>]
 }

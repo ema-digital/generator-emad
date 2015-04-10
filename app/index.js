@@ -19,7 +19,7 @@ module.exports = yeoman.generators.Base.extend({
     return upath.resolve(trim);
   },
   
-  pathToLinux: function(path) {
+  _pathToLinux: function(path) {
     var normal = this._normalizePath(path),
       drive = normal.match(/^[a-z]:/i);
     
@@ -28,6 +28,24 @@ module.exports = yeoman.generators.Base.extend({
     }
     else {
       return normal;
+    }
+  },
+  
+  _mkList: function(string) {
+    if (string.length === 0) {
+      return [];
+    }
+    else {
+      var slashes = string.replace(/\\/g, '/'),
+        sanitize = slashes.replace(/[:?"<>|]/g, ''),
+        paths = sanitize.split(',');
+      
+      return paths.map(function(element, index, array) {
+        return '"' + _.trim(element) + '"';
+      })
+      .filter(function(element, index, array) {
+        return array.indexOf(element) === index;
+      });
     }
   },
 
@@ -43,17 +61,27 @@ module.exports = yeoman.generators.Base.extend({
       {
         name: 'source',
         message: 'source directory',
-        default: '.',
+        default: '.'
       },
       {
         name: 'target',
         message: 'target directory',
-        default: '',
+        default: ''
       },
       {
         name: 'env',
         message: 'environment name',
-        default: 'CHANGEME',
+        default: 'CHANGEME'
+      },
+      {
+        name: 'exclude',
+        message: 'exclude these files/dirs (comma separated)',
+        default: ''
+      },
+      {
+        name: 'include',
+        message: 'include these (comma separated)',
+        default: ''
       }
     ];
 
@@ -71,14 +99,18 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_emad-config.json'),
         this.destinationPath(upath.join('emad-local', 'emad-config.json')),
         {
-          "source": this.pathToLinux(this.props.source),
-          "target": this.pathToLinux(this.props.target),
+          "source": this._pathToLinux(this.props.source),
+          "target": this._pathToLinux(this.props.target),
           "env": _.kebabCase(this.props.env)
         }
       );
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('_emad-project.json'),
-        this.destinationPath('emad-project.json')
+        this.destinationPath('emad-project.json'),
+        {
+          "exclude": this._mkList(this.props.exclude),
+          "include": this._mkList(this.props.include)
+        }
       );
     }
   }
