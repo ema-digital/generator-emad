@@ -45,6 +45,9 @@ module.exports = yeoman.generators.Base.extend({
       })
       .filter(function(element, index, array) {
         return array.indexOf(element) === index;
+      })
+      .filter(function(element, index, array) {
+        return element !== '""';
       });
     }
   },
