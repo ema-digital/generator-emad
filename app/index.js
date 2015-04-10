@@ -1,8 +1,8 @@
 'use strict';
-var yeoman = require('yeoman-generator'),
+var _ = require('lodash'),
   chalk = require('chalk'),
-  _ = require('lodash'),
   upath = require('upath'),
+  yeoman = require('yeoman-generator'),
   yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
@@ -22,6 +22,13 @@ module.exports = yeoman.generators.Base.extend({
   pathToLinux: function(path) {
     var normal = this._normalizePath(path),
       drive = normal.match(/^[a-z]:/i);
+    
+    if (typeof drive !== null) {
+      return '/' + drive[0].charAt(0) + normal.substr(2); 
+    }
+    else {
+      return normal;
+    }
   },
 
   prompting: function () {
@@ -36,7 +43,7 @@ module.exports = yeoman.generators.Base.extend({
       {
         name: 'source',
         message: 'source directory',
-        default: upath.normalize(this.destinationPath()) + '/',
+        default: '.',
       },
       {
         name: 'target',
@@ -64,8 +71,8 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_emad-config.json'),
         this.destinationPath(upath.join('emad-local', 'emad-config.json')),
         {
-          "source": this.normalizePath(this.props.source),
-          "target": this.normalizePath(this.props.target),
+          "source": this.pathToLinux(this.props.source),
+          "target": this.pathToLinux(this.props.target),
           "env": _.kebabCase(this.props.env)
         }
       );
