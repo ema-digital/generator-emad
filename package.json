@@ -4,7 +4,6 @@
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "ema-digital/generator-emad",
   "author": {
     "name": "Eric Mower and Associates",
     "email": "pump_admin@mower.com",
@@ -21,12 +20,12 @@
   "files": [
     "app"
   ],
-  "bugs": {
-    "url": "https://github.com/ema-digital/generator-emad/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ema-digital/generator-emad.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ema-digital/generator-emad/issues"
   },
   "keywords": [
     "yeoman-generator"
@@ -39,6 +38,6 @@
     "yosay": "^1.0.2"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^2.2.4"
   }
 }

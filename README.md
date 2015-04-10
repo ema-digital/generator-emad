@@ -1,7 +1,6 @@
 # generator-emad
-
-> [Yeoman](http://yeoman.io) generator
-
+A [yeoman](http://yeoman.io) generator to create the config files for the
+[emad](https://www.npmjs.com/package/emad) node package.
 
 ## Getting Started
 
